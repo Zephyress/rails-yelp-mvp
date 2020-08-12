@@ -1,3 +1,20 @@
+puts 'Creating 10 fake restaurants...'
+10.times do
+  restaurant = Restaurant.new(
+    name:    Faker::Company.name,
+    address: "#{Faker::Address.street_address}, #{Faker::Address.city}",
+    category: Restaurant::CATEGORIES.sample
+  )
+  restaurant.save!
+
+  review = Review.new(
+    content: Faker::Quote.famous_last_words,
+    rating:  rand(0..5),
+    restaurant_id: restaurant.id
+  )
+  review.save
+end
+puts 'Finished!'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
